@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXPRESS MULTER 사용하기</title>
+  <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    document.getElementById('form').addEventListener('submit', (e) => {
+      const formData = new FormData();
+      formData.append('image', e.target.image.files[0])
+      formData.append('image', e.target.image.files[1])
+      formData.append('image', e.target.image.files[2])
+      formData.append('title', e.target.title.value)
+      axios.post('/upload', formData);
+      e.preventDefault();
+    });
+  </script>
+</head>
+
+<body>
+  <h1>form 태그의 enctype이 multipart/form-data인 경우</h1>
+  <h2>express에서 multer 패키지를 사용해 이미지, 파일을 처리</h2>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" multiple />
+    <input type="text" name="title" />
+    <button type="submit">업로드</button>
+  </form>
+</body>
+
+</html>
